@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
 
-import LINETCR
-from LINETCR.lib.curve.ttypes import *
-from datetime import datetime
-import time,random,sys,json,codecs,threading,glob,re
+from LineAPI.linepy import *
+from LineAPI.akad.ttypes import Message
+from LineAPI.akad.ttypes import ContentType as Type
+from gtts import gTTS
+from time import sleep
+from datetime import datetime, timedelta
+from bs4 import BeautifulSoup
+from googletrans import Translator
+from humanfriendly import format_timespan, format_size, format_number, format_length
+import time, random, sys, json, codecs, threading, glob, re, string, os, requests, six, ast, pytz, urllib, urllib3, urllib.parse, traceback, atexit
 
-cl = LINETCR.LINE()
-cl.login(qr=True)
-cl.loginResult()
+client = LINE()
+#client = LINE("")
+clientMid = client.profile.mid
+clientProfile = client.getProfile()
+clientSettings = client.getSettings()
+clientPoll = OEPoll(client)
+botStart = time.time()
 
-ki = kk = kc = cl 
+msg_dict = {}
 
-print "login success"
-reload(sys)
-sys.setdefaultencoding('utf-8')
-
-helpMessage =""" Chivas Bot
-[Id︎]
-[Mid]
-[Me︎]
 [TL︎:「Text」]
 [Mc 「mid」]
 [K on/off]
